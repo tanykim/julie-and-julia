@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
+
+/* color */
+@main: #cc3c0c; /* red-orgnge */
+@gray: #444241; /* warm gray */
+@white: #f9f6f4; /* slightly warm gray */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: @main;
+  font-family: 'Goudy Bookletter 19911', 'Times New Roman', 'Georgia', 'Serif';
+  color: @white;
+}
+
+.title {
+  text-align: center;
+  h1 {
+    font-weight: normal;
+  }
+}
+
+.search {
+  text-align: center;
+}
+
+.vis {
+  line {
+    stroke: fade(@gray, 20);
+  }
+}
