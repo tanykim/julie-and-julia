@@ -20,5 +20,5 @@ body {
   text-align: center;
 }
 .vis line {
-  stroke: rgba(68, 66, 65, 0.2);
+  /*stroke: fade(@gray, 20);*/
 }

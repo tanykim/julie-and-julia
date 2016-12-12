@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'underscore';
 
 const originalMsg = 'Find which lines of the scrips include what you type.';
@@ -27,7 +28,7 @@ const TextInput = React.createClass({
     if (e.key === 'Enter') {
       e.preventDefault();
       //send result
-      this.props.onSendResult(this.props.searchStr, this.props.result);
+      this.props.onSendResult(this.props.result, this.props.searchStr);
     }
   },
 
@@ -51,7 +52,16 @@ class SearchForm extends Component {
       message: originalMsg,
       result: props.result
     };
+    this.highlight = this.highlight.bind(this);
     this.textEntered = this.textEntered.bind(this);
+  }
+
+  componentDidMount(){
+    ReactDOM.findDOMNode(this.refs.searchInput).focus();
+  }
+
+  highlight(tempResult) {
+    this.props.onHighlight(tempResult);
   }
 
   textEntered(txt) {
@@ -72,8 +82,14 @@ class SearchForm extends Component {
         result : result,
         searchStr: txt
       });
+
+      this.highlight(result);
     } else {
       this.setState({message: originalMsg});
+      //dehighlight all lines
+      this.highlight([]);
+      //remove the text list of result
+
     }
   }
 
@@ -81,6 +97,7 @@ class SearchForm extends Component {
     return (
       <div className="search">
         <TextInput
+          ref="searchInput"
           searchStr={this.state.searchStr}
           result={this.state.result}
           onTextEntered={this.textEntered}

@@ -10,19 +10,32 @@ class App extends Component {
     super(props);
     this.state = {
       data: Script,
-      searchedLines: []
+      searchedLines: [],
+      highlighted: []
     };
-    this.showResult = this.showResult.bind(this);
+    this.onHighlight = this.onHighlight.bind(this);
+    this.onReceiveResult = this.onReceiveResult.bind(this);
   }
 
-  showResult(searchStr, result) {
+  //highlight lines in sync with text enter
+  //this state also helps to show/hide text list
+  onHighlight(tempResult) {
+    this.setState({highlighted: tempResult});
+    // this.onReceiveResult(tempResult);
+  }
 
+  //when text input submitted (return key pressed)
+  onReceiveResult(result, searchStr) {
+    // let searchStr;
+    // if (typedStr) {
+    //   searchStr = typedStr;
+    // }
     //get actual script from the result (array index)
-    let searchedLines = result.map(id => this.state.data[id]);
-
+    //return [line number, the actual text]
+    let searchedLines = result.map((id) => [id, this.state.data[id]]);
     this.setState({
-      searchStr: searchStr,
-      searchedLines: searchedLines
+      searchedLines: searchedLines,
+      searchStr: searchStr
     });
   }
 
@@ -32,9 +45,13 @@ class App extends Component {
         <div className="title">
           <h1> Julie &amp; Julia </h1>
         </div>
-        <SearchForm data={this.state.data} onReceiveResult={this.showResult}/>
-        <TextLineList {...this.state} />
-        <Visualization data={this.state.data} />
+        <SearchForm
+          data={this.state.data}
+          onHighlight={this.onHighlight}
+          onReceiveResult={this.onReceiveResult}
+        />
+        <TextLineList searchedLines={this.state.searchedLines} />
+        <Visualization data={this.state.data} highlighted={this.state.highlighted} />
       </div>
     );
   }

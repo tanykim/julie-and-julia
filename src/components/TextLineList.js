@@ -3,11 +3,8 @@ import markStr from './markSearchedStr';
 import renderHTML from 'react-render-html';
 
 function TextLine(props) {
-
-  console.log(props);
-
-  const listItems = props.searchedLines.map((str, i) =>
-    (<li key={i}>{renderHTML(markStr(str, props.searchStr))}</li>)
+  const listItems = props.searchedLines.map((vals, i) =>
+    (<li key={i}>line no. {vals[0]}- {renderHTML(markStr(vals[1], props.searchStr))}</li>)
   );
   return (
     <ul>{listItems}</ul>
@@ -17,7 +14,7 @@ function TextLine(props) {
 class TextLineList extends Component {
   render() {
     return (
-      <TextLine {...this.props} />
+      <TextLine searchedLines={this.props.searchedLines}/>
     );
   }
 }

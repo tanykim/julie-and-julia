@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
+import { select, selectAll } from 'd3-selection';
 
 //svg size
 const width = 1600;
@@ -47,7 +48,9 @@ function Lines(lineData) {
       y1={vals[1] * pxPerLetter}
       y2={vals[2] * pxPerLetter}
       key={i}
+      className={`line-${i}`}
       strokeWidth={lineWidth * 0.6}
+      stroke="black"
     />)
   );
   return (
@@ -55,13 +58,41 @@ function Lines(lineData) {
   );
 }
 
+//highlighht or dehighlight in sync with user type
+function highlightLine(id) {
+  select(`.line-${id}`).attr('stroke', 'white');
+}
+
+function dehighlightLine(id) {
+  select(`.line-${id}`).attr('stroke', 'black');
+}
+
+//Save highlighted line indexes
+let highlighted = [];
+
 class Visualization extends Component {
 
   constructor(props) {
     super(props);
     this.state = getStrData(this.props.data);
-
   }
+
+  componentWillUpdate(nextProps) {
+    if (_.isEmpty(nextProps.highlighted)) {
+      console.log('---dehighlight all lines');
+      selectAll('line').attr('stroke', 'black');
+    } else {
+      //find newly added or removed lines then change the style separately
+      const newHighs = _.difference(nextProps.highlighted, highlighted);
+      const removedHighs = _.difference(highlighted, nextProps.highlighted);
+      console.log('---highlight', newHighs.length, '--remove', removedHighs.length);
+      newHighs.map((id) => highlightLine(id));
+      removedHighs.map((id) => dehighlightLine(id));
+    }
+    //set new highlighted ones
+    highlighted = nextProps.highlighted;
+  }
+
   render() {
     return (
       <div className="vis">
