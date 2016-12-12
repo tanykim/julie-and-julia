@@ -10,7 +10,7 @@ const Message = React.createClass({
       <div className="message">
         {this.props.message}
       </div>
-    )
+    );
   }
 });
 
@@ -82,14 +82,11 @@ class SearchForm extends Component {
         result : result,
         searchStr: txt
       });
-
       this.highlight(result);
     } else {
       this.setState({message: originalMsg});
       //dehighlight all lines
       this.highlight([]);
-      //remove the text list of result
-
     }
   }
 

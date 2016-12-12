@@ -11,32 +11,30 @@ class App extends Component {
     this.state = {
       data: Script,
       searchedLines: [],
-      highlighted: []
+      highlighted: [],
+      lineNo: null
     };
     this.onHighlight = this.onHighlight.bind(this);
     this.onReceiveResult = this.onReceiveResult.bind(this);
+    this.textHovered = this.textHovered.bind(this);
   }
 
   //highlight lines in sync with text enter
-  //this state also helps to show/hide text list
   onHighlight(tempResult) {
     this.setState({highlighted: tempResult});
-    // this.onReceiveResult(tempResult);
   }
 
   //when text input submitted (return key pressed)
   onReceiveResult(result, searchStr) {
-    // let searchStr;
-    // if (typedStr) {
-    //   searchStr = typedStr;
-    // }
-    //get actual script from the result (array index)
-    //return [line number, the actual text]
     let searchedLines = result.map((id) => [id, this.state.data[id]]);
     this.setState({
       searchedLines: searchedLines,
       searchStr: searchStr
     });
+  }
+
+  textHovered(lineNo) {
+    this.setState({linkedLineNo: lineNo});
   }
 
   render() {
@@ -50,8 +48,16 @@ class App extends Component {
           onHighlight={this.onHighlight}
           onReceiveResult={this.onReceiveResult}
         />
-        <TextLineList searchedLines={this.state.searchedLines} />
-        <Visualization data={this.state.data} highlighted={this.state.highlighted} />
+        <TextLineList
+          searchedLines={this.state.searchedLines}
+          searchStr={this.state.searchStr}
+          onHovered={this.textHovered}
+        />
+        <Visualization
+          data={this.state.data}
+          highlighted={this.state.highlighted}
+          linkedLineNo={this.state.linkedLineNo}
+        />
       </div>
     );
   }

@@ -22,3 +22,14 @@ body {
 .vis line {
   /*stroke: fade(@gray, 20);*/
 }
+.result-list {
+  margin: 0;
+  padding: 0;
+}
+.result-list .item {
+  list-style: none;
+}
+.result-list .item-active {
+  list-style: none;
+  background-color: #444241;
+}
