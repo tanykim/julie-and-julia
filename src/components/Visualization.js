@@ -31,8 +31,7 @@ function getStrData(data) {
     strLenList: strLenList,
     lineWidth: width / columnCount,
     pxPerLetter: pxPerLetter
-  }
-
+  };
 }
 
 function Lines(lineData) {

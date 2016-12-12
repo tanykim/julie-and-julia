@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-render-html": "^0.1.6",
     "underscore": "^1.8.3"
   },
   "scripts": {
