@@ -4,14 +4,14 @@ import renderHTML from 'react-render-html';
 
 const Item = React.createClass({
 
-  getInitialState: function(){
+  getInitialState() {
     return {
-      active: false
+      active: this.props.id === 0 ? true : false
     }
   },
 
   isActive() {
-    return this.state.active? 'item-active': 'item';
+    return this.state.active ? 'item-active' : 'item';
   },
 
   onMouseOver() {
@@ -45,6 +45,7 @@ const TextLine = React.createClass({
         txt={vals[1]}
         searchStr={this.props.searchStr}
         onHovered={this.props.onHovered}
+        id={i}
       />
     ));
     return (<ul className="result-list">{listItems}</ul>);

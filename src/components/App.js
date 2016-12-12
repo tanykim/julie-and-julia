@@ -16,6 +16,7 @@ class App extends Component {
     };
     this.onHighlight = this.onHighlight.bind(this);
     this.onReceiveResult = this.onReceiveResult.bind(this);
+    this.onResetResult = this.onResetResult.bind(this);
     this.textHovered = this.textHovered.bind(this);
   }
 
@@ -27,10 +28,20 @@ class App extends Component {
   //when text input submitted (return key pressed)
   onReceiveResult(result, searchStr) {
     let searchedLines = result.map((id) => [id, this.state.data[id]]);
+
     this.setState({
       searchedLines: searchedLines,
-      searchStr: searchStr
+      searchStr: searchStr,
+      //highlight the first line (linkedLineNO)
+      linkedLineNo: result[0]
     });
+  }
+
+  //when Backspace is pressed after results are shown
+  onResetResult() {
+    this.setState({
+      searchedLines: []
+    })
   }
 
   textHovered(lineNo) {
@@ -47,6 +58,7 @@ class App extends Component {
           data={this.state.data}
           onHighlight={this.onHighlight}
           onReceiveResult={this.onReceiveResult}
+          onResetResult={this.onResetResult}
         />
         <TextLineList
           searchedLines={this.state.searchedLines}

@@ -14,6 +14,8 @@ const Message = React.createClass({
   }
 });
 
+let isEntered = false;
+
 const TextInput = React.createClass({
 
   handleSubmit(txt) {
@@ -24,11 +26,18 @@ const TextInput = React.createClass({
     this.handleSubmit(e.target.value);
   },
 
-  handleKeyPress(e) {
+  onKeyDown(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       //send result
-      this.props.onSendResult(this.props.result, this.props.searchStr);
+      if (!_.isEmpty(this.props.result)) {
+        this.props.onSendResult(this.props.result, this.props.searchStr);
+        document.activeElement.blur();
+        isEntered = true;
+      }
+    } else if (isEntered && e.key === 'Backspace') {
+      //reset results when back space is pressed
+      this.props.onReset();
     }
   },
 
@@ -38,7 +47,7 @@ const TextInput = React.createClass({
         type="text"
         placeholder="Enter word or phrase"
         onChange={this.handleChange}
-        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.onKeyDown}
       />
     );
   }
@@ -99,6 +108,7 @@ class SearchForm extends Component {
           result={this.state.result}
           onTextEntered={this.textEntered}
           onSendResult={this.props.onReceiveResult}
+          onReset={this.props.onResetResult}
         />
         <Message message={this.state.message}/>
       </div>
