@@ -1,0 +1,41 @@
+/* layout */
+
+@titleH: 70px;
+@searchH: 96px;
+@footerH: 40px;
+
+.container-common {
+  width: 100%;
+  text-align: center;
+}
+
+.vis-container {
+  position: fixed;
+  .container-common();
+}
+.result-container {
+  position: absolute;
+  top: @titleH;
+  text-align: center;
+  .container-common();
+}
+.title-container {
+  position: fixed;
+  top: 0;
+  height: @footerH;
+  .container-common();
+}
+.search-container {
+  position: fixed;
+  bottom: @footerH;
+  height: @searchH;
+  .container-common();
+  background-color: @dark-red;
+}
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  height: @footerH;
+  .container-common();
+  background-color: @bg;
+}

@@ -50,26 +50,55 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div className="title">
-          <h1> Julie &amp; Julia </h1>
+      <div className="container-fluid">
+        {/* visualization */}
+        <div className="row vis-container" id="vis-width">
+          <div className="col-xs-12 vis">
+            <Visualization
+              data={this.state.data}
+              highlighted={this.state.highlighted}
+              linkedLineNo={this.state.linkedLineNo}
+            />
+          </div>
         </div>
-        <SearchForm
-          data={this.state.data}
-          onHighlight={this.onHighlight}
-          onReceiveResult={this.onReceiveResult}
-          onResetResult={this.onResetResult}
-        />
-        <TextLineList
-          searchedLines={this.state.searchedLines}
-          searchStr={this.state.searchStr}
-          onHovered={this.textHovered}
-        />
-        <Visualization
-          data={this.state.data}
-          highlighted={this.state.highlighted}
-          linkedLineNo={this.state.linkedLineNo}
-        />
+        {/* result */}
+        <div className="row result-container">
+          <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3 result">
+            <TextLineList
+              searchedLines={this.state.searchedLines}
+              searchStr={this.state.searchStr}
+              onHovered={this.textHovered}
+            />
+          </div>
+        </div>
+        {/* title */}
+        <div className="row title-container">
+          <div className="col-xs-12 title">
+            Julie <span className="amp">&amp;</span> Julia
+          </div>
+        </div>
+        {/* search */}
+        <div className="row search-container">
+          <div className="col-xs-12 search">
+            <SearchForm
+              data={this.state.data}
+              onHighlight={this.onHighlight}
+              onReceiveResult={this.onReceiveResult}
+              onResetResult={this.onResetResult}
+            />
+          </div>
+        </div>
+        {/* footer */}
+        <div className="row footer-container">
+          <div className="col-xs-12 footer">
+            <ul>
+              <li>Inspired by <a href="https://twitter.com/pencilpenbrush/status/803756815225909248" target="_blacnk">@pencilpenbrush</a></li>
+              <li>View on <a href="https://github.com/tanykim/julie-and-julia" target="_blacnk">GitHub</a></li>
+              <li><a href="http://www.script-o-rama.com/movie_scripts/j/julie-and-julia-script-transcript.html" target="_blacnk">Original Script</a></li>
+              <li>Made by <a href="http://tany.kim" target="_blank">@tanykim</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

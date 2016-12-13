@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'underscore';
+import renderHTML from 'react-render-html';
 
-const originalMsg = 'Find which lines of the scrips include what you type.';
+const originalMsg = 'Find which lines of the scripts include what you type';
 
 const Message = React.createClass({
   render() {
     return (
       <div className="message">
-        {this.props.message}
+        {renderHTML(this.props.message)}
       </div>
     );
   }
@@ -43,7 +44,7 @@ const TextInput = React.createClass({
 
   render() {
     return (
-      <input
+      <input className="search-input"
         type="text"
         placeholder="Enter word or phrase"
         onChange={this.handleChange}
@@ -87,7 +88,7 @@ class SearchForm extends Component {
         return d > -1;
       });
       this.setState({
-        message: `${result.length} line${result.length > 1 ? 's': ''} have ${txt}`,
+        message: `<i>${result.length}</i> line${result.length > 1 ? 's': ''} ha${result.length === 1 ? 's': 've'} <i>${txt}</i>`,
         result : result,
         searchStr: txt
       });
@@ -102,6 +103,7 @@ class SearchForm extends Component {
   render() {
     return (
       <div className="search">
+        <Message message={this.state.message}/>
         <TextInput
           ref="searchInput"
           searchStr={this.state.searchStr}
@@ -110,7 +112,6 @@ class SearchForm extends Component {
           onSendResult={this.props.onReceiveResult}
           onReset={this.props.onResetResult}
         />
-        <Message message={this.state.message}/>
       </div>
     );
   }

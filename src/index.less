@@ -1,43 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 /* color */
-@main: #cc3c0c; /* red-orgnge */
-@gray: #444241; /* warm gray */
-@white: #f9f6f4; /* slightly warm gray */
+
+/* red-orgnge */
+@bg: #b03719; /* #cc3c0c; e1380d;
+/* close to white, slightly warm gray */
+@main: #f9f6f4;
+/* warm gray */
+@grey: #444241;
+/* golden */
+@golden: #efda9b;
+/* dark-red */
+@dark-red: #a0341e;
+/* black transparent */
+@black-semi: rgba(31, 7, 1, 0.5);
 
 body {
   margin: 0;
   padding: 0;
-  background-color: @main;
-  font-family: 'Goudy Bookletter 19911', 'Times New Roman', 'Georgia', 'Serif';
-  color: @white;
+  background-color: @bg;
+  font-family: 'Kennerley', 'Goudy Bookletter 19911', 'Times New Roman', 'Georgia', 'Serif';
+  color: @main;
+  letter-spacing: 0.06em;
 }
 
-.title {
-  text-align: center;
-  h1 {
-    font-weight: normal;
-  }
-}
-
-.search {
-  text-align: center;
-}
-
-.vis {
-  line {
-    /*stroke: fade(@gray, 20);*/
-  }
-}
-
-.result-list {
-  margin: 0;
-  padding: 0;
-  .item {
-    list-style: none;
-  }
-  .item-active {
-    .item();
-    background-color: @gray;
-  }
-}
+@import 'less/layout';
+@import 'less/components';

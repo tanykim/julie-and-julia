@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 import { select, selectAll } from 'd3-selection';
+import { Size, Colors } from './../constants/design';
 
 //svg size
-const width = 1600;
-const height = 300;
+const width = window.innerWidth;
+const height = window.innerHeight - Size.footerH;
+console.log(width, height);
 
 function getStrData(data) {
   var strLenList = [];
   let letterCount = 0;
   let columnCount = 0;
 
-  //set the longest line fill the height;
+  //set the doubled length of the longest line fill the height
+  //at least 2 pixel for one character
   const maxLen = _.max(data.map(d => d.length));
-  const pxPerLetter = height / maxLen;
+  const pxPerLetter = Math.max(height / (maxLen * 2), 2);
 
   //distance between lines in a same vertical
   const pxBtwLines = 2;
@@ -50,7 +53,7 @@ function Lines(lineData) {
       key={i}
       className={`line-${i}`}
       strokeWidth={lineWidth * 0.6}
-      stroke="black"
+      stroke={Colors.black}
     />)
   );
   return (
@@ -64,22 +67,22 @@ let linkedNo;
 
 //highlighht or dehighlight in sync with user type
 function highlightLine(id) {
-  select(`.line-${id}`).attr('stroke', 'white');
+  select(`.line-${id}`).attr('stroke', Colors.main);
 }
 
 function dehighlightLine(id) {
-  select(`.line-${id}`).attr('stroke', 'black');
+  select(`.line-${id}`).attr('stroke', Colors.black);
 }
 
 //highlight the line that is linked from the text result
 function linkLine(id) {
-  select(`.line-${id}`).attr('stroke', 'blue');
+  select(`.line-${id}`).attr('stroke', Colors.golden);
 }
 
 function updateLines(newVals) {
   //higlight as typed
   if (_.isEmpty(newVals)) {
-    selectAll('line').attr('stroke', 'black');
+    selectAll('line').attr('stroke', Colors.black);
   } else if (newVals !== highlighted) {
     //find newly added or removed lines then change the style separately
     const newHighs = _.difference(newVals, highlighted);
@@ -118,14 +121,11 @@ class Visualization extends Component {
 
   render() {
     return (
-      <div className="vis">
-        <svg width={width} height={height}>
-          <Lines {...this.state} />
-        </svg>
-      </div>
+      <svg width={width} height={height}>
+        <Lines {...this.state} />
+      </svg>
     );
   }
 }
 
 export default Visualization;
-

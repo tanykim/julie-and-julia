@@ -30,7 +30,7 @@ const Item = React.createClass({
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
       >
-        line {this.props.lineNo} -
+        <span className="line-no">line {this.props.lineNo}</span>
         {renderHTML(markStr(this.props.txt, this.props.searchStr))}
       </li>
     );
