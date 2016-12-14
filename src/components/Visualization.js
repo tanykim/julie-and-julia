@@ -48,17 +48,18 @@ class Visualization extends Component {
   blink() {
 
     const id = _.random(0, this.state.strLenList.length);
-    linkLine(id);
+    const delay = _.random(600, 1000);
+    _.debounce(linkLine(id), delay);
     setTimeout(
       () => stopBlink(id),
-      300
+      (delay / 2) + 300
     );
   }
 
   componentDidMount() {
     this.timer = setInterval(
       () => this.blink(),
-      1200
+      200
     );
   }
 

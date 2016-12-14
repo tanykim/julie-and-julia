@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 /* color */
 /* red-orgnge */
 /* #cc3c0c; e1380d;
@@ -14,6 +15,12 @@ body {
   font-family: 'Kennerley', 'Goudy Bookletter 19911', 'Times New Roman', 'Georgia', 'Serif';
   color: #f9f6f4;
   letter-spacing: 0.06em;
+}
+.hide {
+  display: hide;
+}
+.show {
+  display: block;
 }
 /* layout */
 .container-common {
@@ -47,8 +54,8 @@ body {
   padding-right: 0 !important;
 }
 .result {
-  padding-top: 20px;
-  padding-bottom: 200px;
+  /*padding-top: 20px;*/
+  padding-bottom: 220px;
   /* same as the total height in the default bottom */
   /* to fill the width on the mobile screen */
   padding-left: 0px;
@@ -62,7 +69,7 @@ body {
   list-style: none;
   padding-top: 12px;
   padding-bottom: 12px;
-  line-height: 120%;
+  line-height: 126%;
 }
 .result .result-list .item i {
   color: #efda9b;
@@ -76,11 +83,15 @@ body {
   background-color: #444241;
   text-transform: uppercase;
   margin-right: 9px;
-  margin-left: 9px;
+  margin-left: 7px;
   padding: 2px 2px 2px 6px;
   letter-spacing: 2px;
 }
-.result .result-list .item:hover {
+.result .result-list .item-over {
+  list-style: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  line-height: 126%;
   color: #efda9b;
   background-color: rgba(31, 7, 1, 0.5);
   -webkit-transition: all 0.3s ease-in-out;
@@ -88,13 +99,29 @@ body {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
-.result .result-list .item:hover i {
-  color: #f9f6f4;
-}
-.result .result-list .item:hover .index-no {
+.result .result-list .item-over i {
   color: #efda9b;
 }
-.result .result-list .item:hover .line-no {
+.result .result-list .item-over .index-no {
+  font-size: 10px;
+  color: #444241;
+}
+.result .result-list .item-over .line-no {
+  font-size: 10px;
+  background-color: #444241;
+  text-transform: uppercase;
+  margin-right: 9px;
+  margin-left: 7px;
+  padding: 2px 2px 2px 6px;
+  letter-spacing: 2px;
+}
+.result .result-list .item-over i {
+  color: #f9f6f4;
+}
+.result .result-list .item-over .index-no {
+  color: #efda9b;
+}
+.result .result-list .item-over .line-no {
   color: #efda9b;
   background-color: transparent;
 }
@@ -102,16 +129,19 @@ body {
   color: #efda9b;
   font-weight: normal;
   font-size: 28px;
-  margin-top: 16px;
   margin-top: 12px;
-  margin-bottom: 12px;
   letter-spacing: 4px;
 }
 .title .amp {
   font-family: Bonodi;
 }
+.title.small {
+  background-color: #a0341e;
+  font-size: 20px;
+}
 .search {
   background-color: #a0341e;
+  margin-top: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
 }
@@ -131,6 +161,8 @@ body {
   background-color: #f9f6f4;
   border: 1px solid #b03719;
   outline: none;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 .search .search-input:focus {
   box-shadow: 0 0 8px #efda9b;
@@ -155,4 +187,27 @@ body {
   display: inline-block;
   margin-left: 12px;
   margin-right: 12px;
+}
+.story {
+  font-family: 'Spoqa Han Sans';
+  text-align: left;
+  font-size: 16px;
+  padding-top: 26px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #efda9b;
+  line-height: 120%;
+}
+.story p {
+  margin-bottom: 16px;
+}
+.story .main {
+  color: #f9f6f4;
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.story .signature {
+  font-size: 13px;
+  margin-bottom: 20px;
 }

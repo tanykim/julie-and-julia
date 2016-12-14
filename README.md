@@ -11,6 +11,11 @@ cd julie-and-jula/src
 lessc index.less index.css
 ```
 
+### Secret message
+
+See ```src/constants/secrets.local``` and modify your secret message.
+Then copy the file as json. ```cp secrets.local secrets.json```
+
 ### Data Source
 
 [Julie & Julie Script](http://www.script-o-rama.com/movie_scripts/j/julie-and-julia-script-transcript.html)

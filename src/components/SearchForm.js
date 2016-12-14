@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'underscore';
 import renderHTML from 'react-render-html';
+import secrets from './../constants/secrets.json';
 
 const originalMsg = 'Find which lines of the scripts include what you type';
 
@@ -14,6 +15,20 @@ const Message = React.createClass({
 });
 
 let isEntered = false;
+
+function getSecretStory(str) {
+  let story = '';
+  for (const secret of secrets) {
+    //check if it is same as password
+    if (secret.password === str.toLowerCase().trim()) {
+      story = (`@${secret.password}
+        <div class="main">${secret.story}</div>
+        <div class="signature">${secret.date}<br/>${secret.from}</div>`);
+      break;
+    }
+  }
+  return story;
+}
 
 const TextInput = React.createClass({
 
@@ -28,14 +43,21 @@ const TextInput = React.createClass({
   onKeyDown(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      //send result
-      if (!_.isEmpty(this.props.result)) {
+
+      //check secret code
+      const story = getSecretStory(this.props.searchStr);
+      this.props.onSecretStory(story);
+
+      //if there's no story
+      if (story === '' && !_.isEmpty(this.props.result)) { //send result
         this.props.onSendResult(this.props.result, this.props.searchStr);
-        document.activeElement.blur();
-        isEntered = true;
       }
+      document.activeElement.blur();
+      isEntered = true;
+
     } else if (isEntered && e.key === 'Backspace') {
       //reset results when back space is pressed
+      this.props.onSecretStory('');
       this.props.onReset();
     }
   },
@@ -112,6 +134,7 @@ class SearchForm extends Component {
             onTextEntered={this.textEntered}
             onSendResult={this.props.onReceiveResult}
             onReset={this.props.onResetResult}
+            onSecretStory={this.props.onSecretStory}
           />
         </div>
       </div>

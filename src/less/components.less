@@ -5,8 +5,8 @@
   padding-right: 0 !important;
 }
 .result {
-  padding-top: 20px;
-  padding-bottom: 200px; /* same as the total height in the default bottom */
+  /*padding-top: 20px;*/
+  padding-bottom: 220px; /* same as the total height in the default bottom */
   /* to fill the width on the mobile screen */
   padding-left: 0px;
   padding-right: 0px;
@@ -17,35 +17,36 @@
       list-style: none;
       padding-top: 12px;
       padding-bottom: 12px;
-      line-height: 120%;
+      line-height: 126%;
       i {
-        color: @golden;
+        color: @blink;
       }
       .index-no {
         font-size: 10px;
-        color: @grey;
+        color: @sub;
       }
       .line-no {
         font-size: 10px;
-        background-color: @grey;
+        background-color: @sub;
         text-transform: uppercase;
         margin-right: 9px;
-        margin-left: 9px;
+        margin-left: 7px;
         padding: 2px 2px 2px 6px;
         letter-spacing: 2px;
       }
     }
-    .item:hover {
-      color: @golden;
+    .item-over {
+      .item();
+      color: @blink;
       background-color: @black-semi;
       i {
         color: @main;
       }
       .index-no {
-        color: @golden;
+        color: @blink;
       }
       .line-no {
-        color: @golden;
+        color: @blink;
         background-color: transparent;
       }
       -webkit-transition: all 0.30s ease-in-out;
@@ -56,25 +57,28 @@
   }
 }
 .title {
-  color: @golden;
+  color: @blink;
   font-weight: normal;
   font-size: 28px;
-  margin-top: 16px;
   margin-top: 12px;
-  margin-bottom: 12px;
   letter-spacing: 4px;
   .amp {
     font-family: Bonodi;
   }
 }
+.title.small {
+  background-color: @bg-dark;
+  font-size: 20px;
+}
 .search {
-  background-color: @dark-red;
+  background-color: @bg-dark;
+  margin-top: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
   .message {
     font-size: 16px;
     i {
-      color: @golden;
+      color: @blink;
     }
   }
   .search-input {
@@ -83,13 +87,15 @@
     margin-top: 9px;
     padding: 9px 15px;
     font-size: 18px;
-    color: @grey;
+    color: @sub;
     background-color: @main;
     border: 1px solid @bg;
     outline: none;
+    -webkit-appearance: none;
+    border-radius: 0;
     &:focus {
-      box-shadow: 0 0 8px @golden;
-      -webkit-box-shadow: i0 0 8px @golden;
+      box-shadow: 0 0 8px @blink;
+      -webkit-box-shadow: i0 0 8px @blink;
     }
   }
 }
@@ -111,5 +117,28 @@
       margin-left: 12px;
       margin-right: 12px;
     }
+  }
+}
+.story {
+  font-family: 'Spoqa Han Sans';
+  text-align: left;
+  font-size: 16px;
+  padding-top: 26px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: @blink;
+  line-height: 120%;
+  p {
+    margin-bottom: 16px;
+  }
+  .main {
+    color: @main;
+    font-size: 13px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .signature {
+    font-size: 13px;
+    margin-bottom: 20px;
   }
 }

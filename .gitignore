@@ -20,3 +20,6 @@ build
 .env
 npm-debug.log
 *-old.*
+
+# secret setting
+secrets.json

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
 /* color */
 
@@ -7,11 +8,11 @@
 /* close to white, slightly warm gray */
 @main: #f9f6f4;
 /* warm gray */
-@grey: #444241;
+@sub: #444241;
 /* golden */
-@golden: #efda9b;
+@blink: #efda9b;
 /* dark-red */
-@dark-red: #a0341e;
+@bg-dark: #a0341e;
 /* black transparent */
 @black-semi: rgba(31, 7, 1, 0.5);
 
@@ -22,6 +23,13 @@ body {
   font-family: 'Kennerley', 'Goudy Bookletter 19911', 'Times New Roman', 'Georgia', 'Serif';
   color: @main;
   letter-spacing: 0.06em;
+}
+
+.hide {
+  display: hide;
+}
+.show {
+  display: block;
 }
 
 @import 'less/layout';
