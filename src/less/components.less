@@ -5,6 +5,11 @@
   padding-right: 0 !important;
 }
 .result {
+  padding-top: 20px;
+  padding-bottom: 200px; /* same as the total height in the default bottom */
+  /* to fill the width on the mobile screen */
+  padding-left: 0px;
+  padding-right: 0px;
   .result-list {
     margin: 0;
     padding: 0;
@@ -16,26 +21,37 @@
       i {
         color: @golden;
       }
+      .index-no {
+        font-size: 10px;
+        color: @grey;
+      }
       .line-no {
         font-size: 10px;
         background-color: @grey;
         text-transform: uppercase;
         margin-right: 9px;
+        margin-left: 9px;
         padding: 2px 2px 2px 6px;
         letter-spacing: 2px;
       }
     }
-    .item-active {
-      .item();
+    .item:hover {
       color: @golden;
       background-color: @black-semi;
       i {
         color: @main;
       }
+      .index-no {
+        color: @golden;
+      }
       .line-no {
         color: @golden;
         background-color: transparent;
       }
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
     }
   }
 }
@@ -44,13 +60,17 @@
   font-weight: normal;
   font-size: 28px;
   margin-top: 16px;
-  letter-spacing: 1px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  letter-spacing: 4px;
   .amp {
     font-family: Bonodi;
   }
 }
 .search {
-  padding-top: 6px;
+  background-color: @dark-red;
+  padding-top: 12px;
+  padding-bottom: 12px;
   .message {
     font-size: 16px;
     i {
@@ -58,7 +78,7 @@
     }
   }
   .search-input {
-    width: 33%;
+    width: 100%;
     height: 42px;
     margin-top: 9px;
     padding: 9px 15px;
@@ -70,10 +90,6 @@
     &:focus {
       box-shadow: 0 0 8px @golden;
       -webkit-box-shadow: i0 0 8px @golden;
-/*      -webkit-transition: all 0.30s ease-in-out;
-      -moz-transition: all 0.30s ease-in-out;
-      -ms-transition: all 0.30s ease-in-out;
-      -o-transition: all 0.30s ease-in-out;*/
     }
   }
 }
@@ -81,6 +97,7 @@
   font-size: 13px;
   color: @black-semi;
   padding-top: 10px;
+  padding-bottom: 10px;
   a {
     color: @black-semi;
     text-decoration: underline;

@@ -8,9 +8,7 @@ const originalMsg = 'Find which lines of the scripts include what you type';
 const Message = React.createClass({
   render() {
     return (
-      <div className="message">
-        {renderHTML(this.props.message)}
-      </div>
+      <div>{renderHTML(this.props.message)}</div>
     );
   }
 });
@@ -66,7 +64,7 @@ class SearchForm extends Component {
     this.textEntered = this.textEntered.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     ReactDOM.findDOMNode(this.refs.searchInput).focus();
   }
 
@@ -102,16 +100,20 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <div className="search">
-        <Message message={this.state.message}/>
-        <TextInput
-          ref="searchInput"
-          searchStr={this.state.searchStr}
-          result={this.state.result}
-          onTextEntered={this.textEntered}
-          onSendResult={this.props.onReceiveResult}
-          onReset={this.props.onResetResult}
-        />
+      <div className="row search">
+        <div className="col-xs-12 message">
+          <Message message={this.state.message}/>
+        </div>
+        <div className="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+          <TextInput
+            ref="searchInput"
+            searchStr={this.state.searchStr}
+            result={this.state.result}
+            onTextEntered={this.textEntered}
+            onSendResult={this.props.onReceiveResult}
+            onReset={this.props.onResetResult}
+          />
+        </div>
       </div>
     );
   }

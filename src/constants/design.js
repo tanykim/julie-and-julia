@@ -1,12 +1,15 @@
-export const Size = {
-  //as search + footer height in less layout.css
-  footerH: 96 + 40
+//svg size
+export const Dim = {
+  w: window.innerWidth,
+  //default part on the bottom height
+  h: window.innerHeight - 200
 };
 
 //set in index.less
 //TODO: make constants to set both js and css
 export const Colors = {
   black: 'rgba(31, 7, 1, 0.1)',
-  main: '#f9f6f4',
-  golden: '#efda9b'
+  main: 'rgb(249, 246, 244)',
+  golden: '#efda9b',
+  dimmed: 'rgba(249, 246, 244, 0.2)'
 };

@@ -1,8 +1,6 @@
 /* layout */
 
-@titleH: 70px;
-@searchH: 96px;
-@footerH: 40px;
+@defaultH: 150px;
 
 .container-common {
   width: 100%;
@@ -15,27 +13,16 @@
 }
 .result-container {
   position: absolute;
-  top: @titleH;
   text-align: center;
   .container-common();
 }
-.title-container {
-  position: fixed;
-  top: 0;
-  height: @footerH;
-  .container-common();
-}
-.search-container {
-  position: fixed;
-  bottom: @footerH;
-  height: @searchH;
-  .container-common();
-  background-color: @dark-red;
-}
-.footer-container {
+.default-container {
   position: fixed;
   bottom: 0;
-  height: @footerH;
-  .container-common();
   background-color: @bg;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  .container-common();
 }
