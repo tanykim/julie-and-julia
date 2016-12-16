@@ -14,15 +14,13 @@ const Message = React.createClass({
   }
 });
 
-let isEntered = false;
-
 function getSecretStory(str) {
   let story = '';
   for (const secret of secrets) {
     //check if it is same as password
     if (secret.password === str.toLowerCase().trim()) {
       story = (`@${secret.password}
-        <div class="main">${secret.story}</div>
+        <div class="main"><p>${secret.story}</div>
         <div class="signature">${secret.date}<br/>${secret.from}</div>`);
       break;
     }
@@ -32,31 +30,41 @@ function getSecretStory(str) {
 
 const TextInput = React.createClass({
 
-  handleSubmit(txt) {
+  getInitialState () {
+    return {isEntered: false};
+  },
+
+  handleTyping(txt) {
     this.props.onTextEntered(txt);
   },
 
   handleChange(e) {
-    this.handleSubmit(e.target.value);
+    this.handleTyping(e.target.value);
   },
 
-  onKeyDown(e) {
+  showResult() {
+    const story = getSecretStory(this.props.searchStr);
+    this.props.onSecretStory(story);
+    //if there's no story
+    if (story === '' && !_.isEmpty(this.props.result)) { //send result
+      this.props.onSendResult(this.props.result, this.props.searchStr);
+    }
+  },
+
+  handleBlur(e) {
+    console.log('---------');
+    setTimeout(
+      () => this.showResult(),
+    100);
+  },
+
+  handleKeyDown(e) {
+    //reset results when back space is pressed
     if (e.key === 'Enter') {
       e.preventDefault();
-
-      //check secret code
-      const story = getSecretStory(this.props.searchStr);
-      this.props.onSecretStory(story);
-
-      //if there's no story
-      if (story === '' && !_.isEmpty(this.props.result)) { //send result
-        this.props.onSendResult(this.props.result, this.props.searchStr);
-      }
+      this.setState({isEntered: true});
       document.activeElement.blur();
-      isEntered = true;
-
-    } else if (isEntered && e.key === 'Backspace') {
-      //reset results when back space is pressed
+    } else if (this.state.isEntered && e.key === 'Backspace') {
       this.props.onSecretStory('');
       this.props.onReset();
     }
@@ -68,7 +76,8 @@ const TextInput = React.createClass({
         type="text"
         placeholder="Enter word or phrase"
         onChange={this.handleChange}
-        onKeyDown={this.onKeyDown}
+        onKeyDown={this.handleKeyDown}
+        onBlur={this.handleBlur}
       />
     );
   }
